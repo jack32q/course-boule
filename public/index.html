@@ -2,26 +2,74 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Course Circulaire 🏁</title>
   <style>
-    body { text-align: center; font-family: sans-serif; margin-top: 30px; }
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      text-align: center;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+
     #track {
-      width: 300px;
-      height: 300px;
+      width: 80vw;
+      max-width: 300px;
+      aspect-ratio: 1;
       border: 10px solid #ccc;
       border-radius: 50%;
       margin: 20px auto;
       position: relative;
     }
+
     .ball {
-      width: 20px;
-      height: 20px;
+      width: 6vw;
+      max-width: 20px;
+      height: 6vw;
+      max-height: 20px;
       border-radius: 50%;
       position: absolute;
     }
+
     #myBall { background: blue; }
     #enemyBall { background: red; }
-    button { padding: 10px 20px; font-size: 18px; margin: 10px; }
+
+    input, button {
+      font-size: 1.1rem;
+      padding: 10px;
+      margin: 8px 0;
+      width: 80%;
+      max-width: 300px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      touch-action: manipulation;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #tourInfo, #distanceInfo, #status, #countdown {
+      margin: 10px 0;
+    }
+
+    @media (max-width: 400px) {
+      h1 { font-size: 1.5rem; }
+      button, input { font-size: 1rem; }
+    }
   </style>
 </head>
 <body>
@@ -47,7 +95,6 @@
     <h2 id="tourInfo">Tour 1/5</h2>
     <h3 id="distanceInfo">Distance : 0</h3>
 
-
     <div><strong id="myName"></strong> vs <strong id="enemyName"></strong></div>
 
     <button id="readyBtn" onclick="setReady()">✅ Prêt</button>
@@ -62,8 +109,9 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="client.js"></script>
 </body>
+
 <footer style="margin-top: 50px; font-family: sans-serif; font-size: 15px; color: #888;">
   <p style="opacity: 0.8;">🎮 Jeu créé par <strong style="color: black;">Rady Jackson</strong>, fondateur de la startup <strong style="color: darkblue;">CREA</strong>.</p>
 </footer>
 
-</html>
+      </html>
