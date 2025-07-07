@@ -104,6 +104,12 @@
       <button onclick="replay()">🔁 Rejouer</button>
       <button onclick="quit()">🚪 Quitter</button>
     </div>
+
+    <div id="chat" style="margin-top: 20px;">
+      <div id="messages" style="max-height: 150px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; text-align: left; font-size: 14px;"></div>
+      <input id="chatInput" type="text" placeholder="Écris un message..." style="width: 70%; padding: 5px;" />
+      <button onclick="sendMessage()">Envoyer</button>
+     </div>
   </div>
 
   <script src="/socket.io/socket.io.js"></script>
