@@ -112,10 +112,12 @@ socket.on("gameOver", (winnerId) => {
 
   document.getElementById("status").textContent = message;
 
-  // Temporisation de 5 secondes
+  
+
   setTimeout(() => {
-    document.getElementById("afterGame").style.display = "block";
-  }, 5000); // 5 000 ms = 5 secondes
+  document.getElementById("afterGame").style.display = "block";
+  document.getElementById("chat").style.display = "block";
+}, 5000);
 });
 
 socket.on("resetGame", () => {
@@ -168,6 +170,26 @@ function updateEnemyBall() {
   const y = 150 + 120 * Math.sin(rad);
   document.getElementById("enemyBall").style.left = `${x - 10}px`;
   document.getElementById("enemyBall").style.top = `${y - 10}px`;
+}
+
+function sendMessage() {
+  const input = document.getElementById("chatInput");
+  const msg = input.value.trim();
+  if (!msg) return;
+  appendMessage(`${myPseudo} : ${msg}`);
+  socket.emit("chatMessage", { roomId, pseudo: myPseudo, message: msg });
+  input.value = "";
+}
+socket.on("chatMessage", ({ pseudo, message }) => {
+  appendMessage(`${pseudo} : ${message}`);
+});
+
+function appendMessage(text) {
+  const box = document.getElementById("messages");
+  const p = document.createElement("p");
+  p.textContent = text;
+  box.appendChild(p);
+  box.scrollTop = box.scrollHeight;
 }
 
 
