@@ -104,9 +104,18 @@ socket.on("enemyAngle", ({ angle: a, clicks }) => {
 
 socket.on("gameOver", (winnerId) => {
   document.getElementById("clickBtn").style.display = "none";
-  document.getElementById("afterGame").style.display = "block";
-  document.getElementById("status").textContent =
-    winnerId === socket.id ? "🎉 Tu as gagné !" : "😢 Tu as perdu...";
+
+  // Affichage du message de fin
+  const message = winnerId === socket.id
+    ? "🎉 Tu as gagné !"
+    : "😢 Tu as perdu...";
+
+  document.getElementById("status").textContent = message;
+
+  // Temporisation de 5 secondes
+  setTimeout(() => {
+    document.getElementById("afterGame").style.display = "block";
+  }, 5000); // 5 000 ms = 5 secondes
 });
 
 socket.on("resetGame", () => {
