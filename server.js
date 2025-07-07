@@ -60,6 +60,10 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("chatMessage", ({ roomId, pseudo, message }) => {
+  socket.to(roomId).emit("chatMessage", { pseudo, message });
+  });
+
   socket.on("leaveRoom", (roomId) => {
     socket.leave(roomId);
     if (rooms[roomId]) {
