@@ -11,17 +11,23 @@ let ready = false;
 
 function createRoom() {
   myPseudo = document.getElementById("pseudoInput").value.trim();
-  if (!myPseudo) return alert("Entre ton pseudo !");
-  socket.emit("createRoom", myPseudo);
+  const roomName = document.getElementById("roomNameInput").value.trim();
+  const roomPass = document.getElementById("roomPassInput").value;
+
+  if (!myPseudo || !roomName) return alert("Pseudo et nom de room obligatoires !");
+  socket.emit("createRoom", { pseudo: myPseudo, roomName, roomPass });
 }
 
 function joinRoom() {
   myPseudo = document.getElementById("pseudoInput").value.trim();
-  const code = document.getElementById("roomInput").value.trim();
-  if (!myPseudo || !code) return alert("Pseudo et code obligatoires !");
-  roomId = code;
-  socket.emit("joinRoom", { roomId, pseudo: myPseudo });
+  const roomName = document.getElementById("joinRoomNameInput").value.trim();
+  const roomPass = document.getElementById("joinRoomPassInput").value;
+
+  if (!myPseudo || !roomName) return alert("Pseudo et nom de room obligatoires !");
+  socket.emit("joinRoom", { pseudo: myPseudo, roomName, roomPass });
 }
+
+
 
 socket.on("roomCreated", id => {
   roomId = id;
