@@ -69,9 +69,10 @@ io.on("connection", (socket) => {
     }
   });
 
-  socket.on("angleUpdate", ({ roomName, angle, clicks }) => {
-    socket.to(roomName).emit("enemyAngle", { id: socket.id, angle, clicks });
+  socket.on("angleUpdate", ({ roomId, angle, clicks }) => {
+    socket.to(roomId).emit("enemyAngle", { id: socket.id, angle, clicks });
   });
+
 
   socket.on("win", (roomName) => {
     io.to(roomName).emit("gameOver", socket.id);
