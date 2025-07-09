@@ -47,7 +47,11 @@ io.on("connection", (socket) => {
     }
     room.players.push({ id: socket.id, pseudo });
     socket.join(roomName);
-    io.to(roomName).emit("bothPlayersJoined", room.players);
+    io.to(roomName).emit("bothPlayersJoined", room.players.map(p => ({
+      ...p,
+      roomName,
+    })));
+
   });
 
   socket.on("playerReady", (roomName) => {
