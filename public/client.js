@@ -28,12 +28,14 @@ function joinRoom() {
 }
 
 
-
-socket.on("roomCreated", id => {
-  roomId = id;
-  alert("Room créée : " + id);
+socket.on("roomCreated", (roomName) => {
+  alert("Room créée : " + roomName);
+  roomId = roomName; // remplacer la variable roomId par roomName
 });
 
+socket.on("roomExists", () => alert("Cette room existe déjà !"));
+socket.on("roomNotFound", () => alert("Room introuvable !"));
+socket.on("wrongPassword", () => alert("Mot de passe incorrect !"));
 socket.on("roomFull", () => alert("Room pleine !"));
 
 socket.on("bothPlayersJoined", (players) => {
