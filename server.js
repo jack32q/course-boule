@@ -30,6 +30,11 @@ io.on("connection", (socket) => {
     socket.join(roomName);
     socket.emit("roomCreated", roomName);
   });
+  socket.on("chatMessage", ({ roomId, pseudo, message }) => {
+    console.log(`[Chat][${roomId}] ${pseudo}: ${message}`);
+    socket.to(roomId).emit("chatMessage", { pseudo, message });
+  });
+
 
   socket.on("joinRoom", ({ pseudo, roomName, roomPass }) => {
     const room = rooms[roomName];
