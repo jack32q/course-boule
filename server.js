@@ -2,15 +2,21 @@ const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
 const { randomUUID } = require("crypto");
+const path = require("path");
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
+// 💡 Servir les fichiers statiques
+app.use(express.static(path.join(__dirname, "public")));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 const rooms = {}; // { roomName: { password, players: [], ready: [] } }
 
 io.on("connection", (socket) => {
-
   socket.on("createRoom", ({ pseudo, roomName, roomPass }) => {
     if (rooms[roomName]) {
       socket.emit("roomExists");
@@ -43,8 +49,6 @@ io.on("connection", (socket) => {
     socket.join(roomName);
     io.to(roomName).emit("bothPlayersJoined", room.players);
   });
-
-  // Le reste du code utilise roomName comme roomId
 
   socket.on("playerReady", (roomName) => {
     const room = rooms[roomName];
@@ -90,7 +94,6 @@ io.on("connection", (socket) => {
       if (room.players.length === 0) delete rooms[roomName];
     }
   });
-
 });
 
 server.listen(3000, () => console.log("🚀 http://localhost:3000"));
