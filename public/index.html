@@ -78,10 +78,18 @@
 
   <div id="menu">
     <input id="pseudoInput" placeholder="Ton pseudo" />
-    <button onclick="createRoom()">Créer une room</button><br><br>
-    <input id="roomInput" placeholder="Code de room" />
+  
+    <h3>Créer une room</h3>
+    <input id="roomNameInput" placeholder="Nom de la room" />
+    <input id="roomPassInput" placeholder="Mot de passe (optionnel)" type="password" />
+    <button onclick="createRoom()">Créer</button>
+  
+    <h3>Rejoindre une room</h3>
+    <input id="joinRoomNameInput" placeholder="Nom de la room" />
+    <input id="joinRoomPassInput" placeholder="Mot de passe" type="password" />
     <button onclick="joinRoom()">Rejoindre</button>
   </div>
+
 
   <div id="game" style="display: none;">
     <h3 id="status">En attente...</h3>
