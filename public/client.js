@@ -42,6 +42,7 @@ socket.on("bothPlayersJoined", (players) => {
   document.getElementById("menu").style.display = "none";
   document.getElementById("game").style.display = "block";
   myId = socket.id;
+  roomId = players.find(p => p.id === myId)?.roomName || roomId;
 
   const enemy = players.find(p => p.id !== myId);
   document.getElementById("myName").textContent = myPseudo;
